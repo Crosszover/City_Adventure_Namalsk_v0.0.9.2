@@ -1,0 +1,89 @@
+# City Adventure Namalsk v0.0.9.2 - Documentación Técnica
+
+## Estructura del Programa
+
+### Sistemas Principales
+1. **Sistema de Terreno**
+  - Grid isométrico con alturas de 0-3
+  - Nivel 0 = agua
+  - Sombreado basado en orientación (NO más claro, SE más oscuro)
+  - Herramientas: subir/bajar terreno
+  - Selección múltiple de vértices de igual altura
+
+2. **Sistema de Construcción**
+  - Edificios: Casa, Tienda
+  - Verificación de terreno plano
+  - Rotación con tecla 'R'
+  - Demolición
+
+3. **Sistema Económico**
+  - Recursos: dinero, población, felicidad
+  - Ingresos por impuestos
+  - Mantenimiento de edificios
+
+4. **Sistema de Interfaz**
+  - Barra de herramientas superior
+  - Paneles informativos
+  - Tooltips
+  - Indicadores de terreno/construcción
+
+### Estructura de Archivos
+/
+├── main.lua         # Archivo principal
+├── assets/
+│   └── ui/          # Sprites de UI
+│       ├── toolbar.png
+│       ├── btn_terrain_up.png
+│       ├── btn_terrain_down.png
+│       ├── btn_house.png
+│       ├── btn_shop.png
+│       └── btn_delete.png
+└── saves/           # Directorio de guardado
+Copy
+### Controles
+- WASD: Movimiento de cámara
+- Click izquierdo + arrastrar: Editar terreno/construir
+- Click derecho + arrastrar: Mover cámara
+- Rueda del ratón: Zoom
+- R: Rotar edificio durante construcción
+
+### Consideraciones
+1. **Terreno**
+   - Máximo 1 nivel de diferencia entre vértices adyacentes
+   - Tiles con 3 vértices a nivel del mar muestran triángulo de agua
+
+2. **Construcción**
+   - Requiere terreno plano
+   - Verifica recursos suficientes
+   - Comprueba límites del mapa
+
+3. **UI**
+   - Botones 32x32px
+   - Barra superior 64px altura
+   - Posiciones fijas para paneles informativos
+
+### Funciones y Recursos
+- Límite del mapa: 150x150 tiles
+- Tile base: 64x32 pixels
+- Factor de altura visual: 16 pixels/nivel
+
+La numeración de funciones (f001-f043) sigue un orden lógico por sistemas. Mantener este esquema al añadir nuevas funciones.
+
+### Sprites Requeridos
+Los sprites UI deben ser PNG con fondo transparente:
+- toolbar.png: 1024x64
+- Botones: 32x32 cada uno
+  - btn_terrain_up.png (verde claro)
+  - btn_terrain_down.png (rojo claro)
+  - btn_house.png (azul claro)
+  - btn_shop.png (verde)
+  - btn_delete.png (rojo)
+
+### Orden de Inicialización
+1. Ventana y cámara
+2. Grid y heightmap
+3. UI
+4. Sistema de construcción
+5. Economía
+6. Sistema de guardado
+7. Objetivos
